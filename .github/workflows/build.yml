@@ -1,0 +1,52 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:   # permet de déclencher manuellement depuis l'UI GitHub
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupérer le code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Java 17 (compatible avec AGP 8.5)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # 3. Cache Gradle (évite de re-télécharger à chaque push)
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # 4. Rendre gradlew exécutable
+      - name: Make gradlew executable
+        run: chmod +x VipMoMoListener/gradlew
+
+      # 5. Builder l'APK debug
+      - name: Build Debug APK
+        working-directory: VipMoMoListener
+        run: ./gradlew assembleDebug --stacktrace
+
+      # 6. Uploader l'APK comme artifact téléchargeable
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: VipMoMoListener-debug
+          path: VipMoMoListener/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
