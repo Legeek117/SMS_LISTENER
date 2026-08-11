@@ -36,10 +36,11 @@ jobs:
 
       # 4. Rendre gradlew exécutable
       - name: Make gradlew executable
-        run: chmod +x ./gradlew
+        run: chmod +x VipMoMoListener/gradlew
 
       # 5. Builder l'APK debug
       - name: Build Debug APK
+        working-directory: VipMoMoListener
         run: ./gradlew assembleDebug --stacktrace
 
       # 6. Uploader l'APK comme artifact téléchargeable
@@ -47,5 +48,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: VipMoMoListener-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: VipMoMoListener/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
