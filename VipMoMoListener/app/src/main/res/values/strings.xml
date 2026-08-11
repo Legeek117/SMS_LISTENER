@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">VIP MoMo Listener</string>
+    <string name="notif_channel_name">Service VIP MoMo Listener</string>
+    <string name="notif_channel_desc">Notification obligatoire pour que l\'app tourne en permanence.</string>
+    <string name="notif_title">&#x1F451; VIP MoMo Listener ACTIF</string>
+    <string name="notif_text">SMS Mobile Money capturés 24h/24. Ne pas supprimer.</string>
+</resources>

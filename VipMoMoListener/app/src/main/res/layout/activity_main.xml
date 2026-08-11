@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#0B0E1A">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gap="12dp">
+
+        <TextView
+            android:text="&#x1F451; CONFIG VIP MoMo LISTENER"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Application qui capture les SMS MTN/Moov/Orange Money et les envoie au serveur Crypto VIP."
+            android:textSize="12sp"
+            android:textColor="#8C94B5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_request_perms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF5A00"
+            android:textColor="#FFFFFF"
+            android:text="1. &#x1F6E1;&#xFE0F; Autoriser SMS + Batterie + Notifications"/>
+
+        <TextView
+            android:id="@+id/tv_status_perms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="#10B981"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#1C203B"/>
+
+        <EditText
+            android:id="@+id/et_api_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#111322"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#6E7694"
+            android:padding="14dp"
+            android:hint="URL serveur : https://cryptovip.159-223-162-195.nip.io/api/payment/sms-webhook"
+            android:inputType="textUri"/>
+
+        <EditText
+            android:id="@+id/et_api_key"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#111322"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#6E7694"
+            android:padding="14dp"
+            android:hint="Cl&#233; secr&#232;te X-Listener-Key (m&#234;me que le .env du serveur)"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/et_merchant_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#111322"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#6E7694"
+            android:padding="14dp"
+            android:hint="N&#176; MTN de ce t&#233;l&#233;phone (SIM marchand, pour info)"
+            android:inputType="phone"/>
+
+        <Button
+            android:id="@+id/btn_start_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#10B981"
+            android:textColor="#FFFFFF"
+            android:text="2. &#x1F4BE; SAUVEGARDER &amp; D&#201;MARRER LE SERVICE"/>
+
+        <TextView
+            android:id="@+id/tv_status_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#FF5A00"
+            android:text="&#x26A0;&#xFE0F; Service INACTIF &#8212; appuyer sur le bouton ci-dessus pour lancer la capture SMS 24h/24"/>
+
+        <TextView
+            android:text="&#x1F4CB; DERNIERS SMS TRAIT&#201;S (logs locaux) :"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_logs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:fontFamily="monospace"
+            android:textColor="#E5E7EB"
+            android:background="#070913"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+</ScrollView>
