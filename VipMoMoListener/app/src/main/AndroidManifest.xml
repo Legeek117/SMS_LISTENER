@@ -2,46 +2,32 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <!-- =========================================================== -->
-    <!-- 1. TOUTES LES PERMISSIONS OBLIGATOIRES                      -->
+    <!-- PERMISSIONS                                                  -->
     <!-- =========================================================== -->
-    <!-- Lire / Recevoir les SMS -->
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
-
-    <!-- Internet (POST vers le serveur) -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <!-- Redémarrer l'appareil → relancer l'app -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-    <!-- Service Foreground permanent (évite le kill) -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
-
-    <!-- Demander à l'user de désactiver l'optimisation batterie -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-
-    <!-- Notifications Android 13+ (Obligatoire sinon pas de notif) -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
-    <!-- Garder le CPU éveillé (service long) -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <!-- =========================================================== -->
-    <!-- 2. APPLICATION                                               -->
+    <!-- APPLICATION                                                  -->
     <!-- =========================================================== -->
     <application
         android:name=".App"
         android:allowBackup="true"
         android:label="VIP MoMo Listener"
-        android:icon="@mipmap/ic_launcher"
-        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:icon="@drawable/ic_notif"
+        android:roundIcon="@drawable/ic_notif"
+        android:theme="@style/Theme.VipMoMoListener"
         tools:targetApi="34">
 
-        <!-- ========================== -->
-        <!-- 2.1 ÉCRAN PRINCIPAL (LAUNCHER) -->
-        <!-- ========================== -->
+        <!-- Écran principal -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -52,10 +38,7 @@
             </intent-filter>
         </activity>
 
-        <!-- ========================== -->
-        <!-- 2.2 BOOT RECEIVER          -->
-        <!-- Quand le téléphone redémarre, on relance le service -->
-        <!-- ========================== -->
+        <!-- Boot Receiver : relance le service après reboot -->
         <receiver
             android:name=".BootReceiver"
             android:enabled="true"
@@ -67,25 +50,19 @@
             </intent-filter>
         </receiver>
 
-        <!-- ========================== -->
-        <!-- 2.3 SMS RECEIVER           -->
-        <!-- DÉCLENCHÉ AUTOMATIQUEMENT PAR ANDROID À CHAQUE SMS ARRIVÉ -->
-        <!-- ========================== -->
+        <!-- SMS Receiver : déclenché automatiquement à chaque SMS reçu -->
         <receiver
             android:name=".SmsReceiver"
             android:enabled="true"
             android:exported="true"
-            android:directBootAware="true"
             android:permission="android.permission.BROADCAST_SMS">
             <intent-filter android:priority="999">
-                <action android:name="android.provider.Telephony.Sms.Intents.SMS_RECEIVED_ACTION" />
+                <!-- Action correcte : android.provider.Telephony.SMS_RECEIVED -->
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 
-        <!-- ========================== -->
-        <!-- 2.4 SERVICE FOREGROUND     -->
-        <!-- Tourne en permanence → notification permanente visible -->
-        <!-- ========================== -->
+        <!-- Service Foreground : tourne en permanence -->
         <service
             android:name=".ListenerService"
             android:enabled="true"

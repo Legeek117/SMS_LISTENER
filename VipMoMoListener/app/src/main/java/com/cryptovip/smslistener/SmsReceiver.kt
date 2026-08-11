@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class SmsReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        if (intent.action != Telephony.Sms.Intents.SMS_RECEIVED_ACTION) return
+        if (intent.action != "android.provider.Telephony.SMS_RECEIVED") return
 
         // CRITIQUE Android 12+ : goAsync() signale à l'OS qu'on a du travail async, ne pas tuer
         val pending = goAsync()

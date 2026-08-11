@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'       // Obligatoire pour Room (génération de code)
+    id 'com.google.devtools.ksp'   // KSP remplace kapt pour Kotlin 2.x + Room
 }
 
 android {
@@ -30,19 +30,19 @@ android {
 }
 
 dependencies {
-    // ---- UI de base (AppCompat + Material Design) ----
+    // ---- UI ----
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
-    // ---- Coroutines Kotlin (async / IO propre) ----
+    // ---- Coroutines ----
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
 
-    // ---- OkHttp (client HTTP POST vers le serveur) ----
+    // ---- OkHttp ----
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
 
-    // ---- Room (BDD locale SQLite pour LOGS + file d'attente hors ligne) ----
+    // ---- Room ----
     implementation 'androidx.room:room-runtime:2.6.1'
     implementation 'androidx.room:room-ktx:2.6.1'
-    kapt 'androidx.room:room-compiler:2.6.1'
+    ksp 'androidx.room:room-compiler:2.6.1'
 }
